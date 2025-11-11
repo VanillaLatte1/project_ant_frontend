@@ -1,13 +1,16 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
+import {Button} from "@/components/ui/button";
+import Link from "next/link";
+import {Badge} from "@/components/ui/badge";
 
 function Card({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card"
       className={cn(
-        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
+        "bg-card text-card-foreground flex flex-col rounded-xl border py-6 shadow-sm",
         className
       )}
       {...props}
@@ -20,7 +23,7 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card-header"
       className={cn(
-        "@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6",
+        "@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-2 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6",
         className
       )}
       {...props}
@@ -81,6 +84,92 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+function StepCard({
+                    icon,
+                    title,
+                    desc,
+                    linkText,
+                    href,
+                  }: {
+  icon: React.ReactNode;
+  title: string;
+  desc: string;
+  linkText: string;
+  href: string;
+}) {
+  return (
+      <Card className="rounded-3xl border bg-white/80 backdrop-blur">
+        <CardHeader className="pb-2">
+          <div className="flex items-center gap-3">
+            <div
+                className="h-10 w-10 rounded-full bg-indigo-600/10 text-indigo-600 flex items-center justify-center">
+              {icon}
+            </div>
+            <CardTitle className="text-lg md:text-xl">{title}</CardTitle>
+          </div>
+        </CardHeader>
+        <CardContent className="pt-0">
+          <p className="text-sm text-slate-600 leading-relaxed">{desc}</p>
+          <div className="mt-3">
+            <Button variant="link" className="p-0 h-auto text-indigo-600" asChild>
+              <Link href={href}>{linkText}</Link>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+  );
+}
+
+function GroupCard({
+                     title,
+                     category,
+                     tags,
+                     desc,
+                     count,
+                     badge,
+                     cta,
+                   }: {
+  title: string;
+  category: string;
+  tags: string[];
+  desc: string;
+  count: string;
+  badge?: string;
+  cta: string;
+}) {
+  return (
+      <Card className="rounded-3xl hover:shadow-md transition-shadow">
+        <CardHeader>
+          <div className="flex items-center gap-2">
+            <Badge variant="secondary" className="rounded-full">
+              {category}
+            </Badge>
+            {badge && (
+                <Badge className="rounded-full" variant="default">
+                  {badge}
+                </Badge>
+            )}
+          </div>
+          <CardTitle className="mt-2 text-xl">{title}</CardTitle>
+        </CardHeader>
+        <CardContent className="pt-0">
+          <p className="text-sm text-slate-600 leading-relaxed">{desc}</p>
+          <div className="mt-3 flex flex-wrap gap-2 text-xs text-slate-500">
+            {tags.map((t) => (
+                <span key={t}>{t}</span>
+            ))}
+          </div>
+          <div className="mt-6 flex items-center justify-between">
+            <span className="text-sm text-slate-500">{count}</span>
+            <Button className="rounded-2xl" size="sm">
+              {cta}
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+  );
+}
+
 export {
   Card,
   CardHeader,
@@ -89,4 +178,6 @@ export {
   CardAction,
   CardDescription,
   CardContent,
+  StepCard,
+  GroupCard
 }

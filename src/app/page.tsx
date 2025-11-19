@@ -7,7 +7,8 @@ import { ArrowDownDotted } from "@/components/ui/ArrowDownDotted";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { ChevronRight, ChevronLeft, Sparkles, Search, Users, Plus } from "lucide-react";
 import Link from "next/link";
-import LoadingBar from "@/components/ui/LoadingBar";
+import { motion } from "framer-motion";
+import LoadingScreen from "@/components/ui/LoadingScreen";
 import AntIcon from "@/components/ui/AntIcon";
 
 export default function AntLanding() {
@@ -38,11 +39,7 @@ export default function AntLanding() {
     return (
         <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 text-slate-900">
             {/*loading state가 true일 때, 로딩바 호출 및 isDone으로 done state 전달 */}
-            {loading && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-                    <LoadingBar isDone={done} />
-                </div>
-            )}
+            {loading && <LoadingScreen isDone={done} />}
 
             <header className="sticky top-0 z-30 backdrop-blur supports-[backdrop-filter]:bg-white/60 bg-white/80 border-b">
                 <div className="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">

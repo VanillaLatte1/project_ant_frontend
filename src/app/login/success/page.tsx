@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -20,6 +20,21 @@ export default function PhoneVerificationPage() {
         privacy: false,
         marketing: false,
     });
+
+    /* 페이지 로드 시 초기화 처리 (소셜 로그인 후 데이터 처리) */
+    useEffect(() => {
+        const initializePage = async () => {
+            try {
+                // TODO: 여기에 백엔드 API 호출 추가 (사용자 정보 확인, 토큰 검증 등)
+                // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/me`);
+                // const userData = await response.json();
+            } catch (error) {
+                console.error("초기화 중 오류 발생:", error);
+            }
+        };
+
+        initializePage();
+    }, []);
 
     /* 전화번호 format */
     const formatPhone = (value: string) => {
@@ -190,7 +205,6 @@ export default function PhoneVerificationPage() {
                         </>
                     )}
 
-
                     {finished && (
                         <motion.div
                             key="success"
@@ -202,11 +216,11 @@ export default function PhoneVerificationPage() {
                             <h2 className="text-3xl font-extrabold text-green-700 mb-3">
                                 🎉 회원가입 완료!
                             </h2>
-                            <p className="text-slate-600 text-sm mb-6">
+                            <p className="text-slate-600 text-md mb-3">
                                 🐜 환영합니다! 이제 ANT와 함께 시작해보세요!
                             </p>
-                            <Button onClick={() => (window.location.href = "/login")}>
-                                로그인하러 가기
+                            <Button onClick={() => (window.location.href = "/")}>
+                                홈으로
                             </Button>
                         </motion.div>
                     )}

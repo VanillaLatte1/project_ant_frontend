@@ -25,10 +25,9 @@ export default function LoginPage() {
         },
     ];
 
-    /* 지정한 url로 이동 처리 / 추후 소셜 로그인에 맞는 url로 변경 처리 예정 */
+    /* OAuth2 시작 엔드포인트로 리다이렉트하여 소셜 로그인 제공자 페이지로 이동 */
     const handleLogin = (provider: string) => {
-        // window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/login/oauth2/authorization/${provider}`;
-        window.location.href = `http://localhost:3000/login/success`;
+        window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorization/${provider}`;
     };
 
     return (

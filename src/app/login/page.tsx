@@ -3,6 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function LoginPage() {
     /* 추가될 소셜 로그인 버튼 정보 / 현재는 name, style을 위해 사용 중 */
@@ -39,14 +40,16 @@ export default function LoginPage() {
                     transition={{ duration: 0.5 }}
                     className="flex flex-col items-center md:items-start text-center md:text-left max-w-sm"
                 >
-                    <Image
-                        src="/images/ants-row.jpg"
-                        alt="Ant Mascot"
-                        width={180}
-                        height={180}
-                        className="mb-6 select-none"
-                    />
-                    <h2 className="text-3xl font-extrabold text-green-700">ANT</h2>
+                    <Link href="/" className="cursor-pointer">
+                        <Image
+                            src="/images/ants-row.jpg"
+                            alt="Ant Mascot"
+                            width={180}
+                            height={180}
+                            className="mb-6 select-none"
+                        />
+                        <h2 className="text-3xl font-extrabold text-green-700">ANT</h2>
+                    </Link>
                     <p className="mt-3 text-slate-600 leading-relaxed">
                         작지만 지혜롭게,
                         함께 성장하는 소모임 플랫폼 <br />
@@ -61,7 +64,10 @@ export default function LoginPage() {
                 >
                     <Card className="w-80 md:w-96 shadow-xl rounded-2xl border border-gray-200">
                         <CardContent className="flex flex-col items-center text-center p-8">
-                            <h1 className="text-2xl font-bold text-green-700 mb-6">로그인</h1>
+                            <h1 className="text-2xl font-bold text-green-700 mb-2">로그인</h1>
+                            <p className="text-sm text-slate-500 mb-6">
+                                첫 방문이시면 자동으로 가입됩니다
+                            </p>
                             <div className="flex flex-col gap-3 w-full">
                                 {providers.map((p) => (
                                     <button
